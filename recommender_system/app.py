@@ -22,7 +22,7 @@ def get_products(n: int):
     if request.method == "GET":
         return f"{n_data.to_html()}"
     else:
-        return str(n_data.to_json())
+        return list(n_data.drop("clusters", axis=1).T.to_dict().values())
 
 
 @app.route("/recommendations/<int:id>/<int:n>", methods=["GET", "POST"])
@@ -32,4 +32,4 @@ def get_recommendations(id: int, n: int):
     if request.method == "GET":
         return f"{recommendations.to_html()} <h1>This will return '{n}' recommendations where Product ID: '{id}'</h1>"
     else:
-        return f"{recommendations.to_json()}"
+        return list(recommendations.T.to_dict().values())
