@@ -16,10 +16,10 @@ class Recommender(Pipeline):
         X: Optional[pd.DataFrame | np.ndarray] = None,
         y: Optional[pd.Series | np.ndarray] = None,
         **fit_params
-    ) -> None:
+    ):
         """Fit after dropping the ignore_cols"""
 
-        data_fr: pd.DataFrame = self.drop_cols().values
+        data_fr: np.ndarray = self.drop_cols().values
         return super().fit(data_fr)
 
     def drop_cols(self) -> pd.DataFrame:

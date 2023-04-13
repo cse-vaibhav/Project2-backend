@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "project2"
+version = "0.1.0"
+description = ""
+authors = ["cse-vaibhav <jainvaibhav671@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.0.0"
+numpy = "^1.24.2"
+sklearn = "^0.0.post4"
+scikit-learn = "^1.2.2"
+seaborn = "^0.12.2"
+matplotlib = "^3.7.1"
+tqdm = "^4.65.0"
+flask = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
