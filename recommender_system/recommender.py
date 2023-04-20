@@ -52,3 +52,6 @@ class Recommender(Pipeline):
 
         cluster: int = self.get_cluster(user_pref)
         return self.data[self.data["clusters"] == cluster].head(k)
+
+    def get_data(self):
+        return self.data.to_json()
