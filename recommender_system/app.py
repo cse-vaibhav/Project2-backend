@@ -61,4 +61,5 @@ def search():
 
     # filter data
     query = str(request.json.get("query"))
-    return {"data": searcher.search(query)}
+    prods = searcher.search(query)
+    return {"data": prods}
