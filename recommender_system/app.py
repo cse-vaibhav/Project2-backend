@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import joblib
 import os
+import pandas as pd
 
 from .recommender import Recommender
 from .search import Search
@@ -16,8 +17,14 @@ model: Recommender = joblib.load(model_path)
 model.data["ID"] = model.data.index
 model.data = model.data.sort_values(by=["ratings_5max"], ascending=False)
 
+cols = list(model.data.drop(["img_url", "ratings_5max", "discount_price"], axis=1).columns)
+unique_values = []
+for col in cols:
+    unique_values.extend(model.data[col].apply(str).apply(str.lower).unique().tolist())
+df = model.data.T.apply(lambda x: " ".join(list(map(str, x.values.tolist())))).str.lower()
+
 search_data = model.data.drop(["img_url", "discount_price", "ratings_5max"], axis=1).T.apply(lambda x: " ".join(list(map(str, x.values.tolist()))))
-searcher = Search(search_data)
+searcher = Search(search_data, unique_values)
 
 # Return all data
 @app.route("/", methods=["GET", "POST"])
